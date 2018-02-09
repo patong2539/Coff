@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        Order Coffee
+    </title>
+    <style id="webmakerstyle">
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            font-family: 'Pattaya', sans-serif;
+            background: -webkit-linear-gradient(left, #a73737, #7a2828);
+            background: linear-gradient(to right, #a73737, #7a2828);
+            background: url("https://c1.staticflickr.com/9/8254/8666007618_958dd85788_b.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        a {
+            cursor: pointer;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+        }
+        .menu {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+        .button {
+            width: 350px;
+            height: 350px;
+            -webkit-transition: .2s all ease-in-out;
+            transition: .2s all ease-in-out;
+            color: #fff;
+            font-size: 4.5em;
+            overflow: hidden;
+            border-radius: 10px;
+            background-size: cover !important;
+            background-position: center !important;
+            margin: 20px auto;
+        }
+            .button::before {
+                content: "";
+                display: block;
+                background: rgba(0, 0, 0, 0.4);
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                border-radius: 10px;
+                -webkit-transition: .3s all ease;
+                transition: .3s all ease;
+            }
+            .button:hover::before {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .button a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 470%;
+                -webkit-transition: .3s all ease;
+                transition: .3s all ease;
+                position: absolute;
+                z-index: 2;
+            }
+                .button a:hover {
+                    line-height: 400%;
+                }
+        #choicecoffee,
+        #coffee {
+            background: url("http://fb1-cl.lnwfile.com/_/cl/_raw/99/60/qz.jpg");
+        }
+        #choicetea {
+            background: url("https://goohiw.com/wp-content/uploads/2015/11/sweet-a-holic-featured-1140x630.jpg");
+        }
+        #coffeemenu {
+            display: none;
+        }
+        #teamenu {
+            display: none;
+        }
+        #caffelatte {
+            background: url("https://www.chemipan.com/home/images/stories/virtuemart/product/%E0%B8%81%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B9%81%E0%B8%9F.jpg");
+        }
+        #cappuccino {
+            background: url("https://steemit-production-imageproxy-upload.s3.amazonaws.com/DQmNt1GiLBtx8JFs9n4g13HnfPdBHppX5zNQzyCfXdDnXEd");
+        }
+        #espresso {
+            background: url("http://4.bp.blogspot.com/-eq_FGPNIjH4/Unci-7k8ZhI/AAAAAAAAAEk/SQYJQDXmJ1Y/s1600/%E0%B9%80%E0%B8%AD%E0%B8%AA%E0%B9%80%E0%B8%9E%E0%B8%A3%E0%B8%AA%E0%B9%82%E0%B8%8B%E0%B9%88.JPG");
+        }
+        #earlgrey {
+            background: url("https://f.ptcdn.info/078/052/000/os5fadnb8UIYqYee6Ke-o.jpg");
+        }
+    #earlgrey1 {
+        background: url("http://www.yamyen.com/wp-content/uploads/2017/07/Honey-Toast.jpg"); 
+    }
+    #earlgrey2 { background: url("http://ipattaya.co/wp-content/uploads/2015/12/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%9A%E0%B8%B4%E0%B8%87%E0%B8%8B%E0%B8%B9%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2-Jungle-Snow12.jpg"); }
+        #greentea {
+            background: url("https://f.ptcdn.info/286/025/000/1415282993-6d1f45732a-o.jpg");
+        }
+        #minttea {
+            background: url("http://www.ryoiireview.com/upload/article/201609/1474014380_ac1aa4ee503244145acab54d6d46eb72.jpg");
+        }
+        #screen {
+            display: none;
+            width: 100%;
+            min-height: 100px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            font-size: 4.5em;
+            margin: auto;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+        }
+        #drinkmenu {
+            display: none;
+            width: 100%;
+            height: 800px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
+            font-size: 3.8em;
+            text-align: center;
+        }
+        #strength,
+        #sugar,
+        #milk {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: column;
+            flex-flow: column;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #lessstrength,
+        #lesssugar,
+        #lessmilk {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            visibility: hidden;
+        }
+        #lessstrength,
+        #morestrength,
+        #lesssugar,
+        #moresugar,
+        #lessmilk,
+        #moremilk {
+            height: 42px;
+            font-size: 1.5em;
+            padding: 0 10px;
+            color: saddlebrown;
+        }
+            #lessstrength:hover,
+            #morestrength:hover,
+            #lesssugar:hover,
+            #moresugar:hover,
+            #lessmilk:hover,
+            #moremilk:hover {
+                cursor: pointer;
+            }
+        .setting {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            height: 40px;
+            line-height: 12px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        #order {
+            display: block;
+            background: -webkit-linear-gradient(right, #ee0979, #ff6a00);
+            background: linear-gradient(to left, #ee0979, #ff6a00);
+            width: 250px;
+            height: 100px;
+            border-radius: 50px;
+            position: relative;
+            top: 10px;
+            margin: 0 auto;
+            text-align: center;
+        }
+            #order:hover {
+                cursor: pointer;
+            }
+            #order p {
+                text-align: center;
+                color: #fff;
+                font-size: 1.5em;
+                line-height: 70px;
+                margin: 0 auto;
+            }
+    </style>
+</head>
+<body>
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
+        <body>
+            <div class="container">
+                <div id="mainmenu" class="menu">
+                    <div id="choicecoffee" class="button animated bounceIn">
+                        <a>เครื่องดื่ม</a>
+                    </div>
+                    <div id="choicetea" class="button animated bounceIn"><a>ของหวาน</a></div>
+                </div>
+                <div id="coffeemenu" class="menu">
+                    <div id="coffee" class="button animated bounceIn drink"><a>กาแฟ</a></div>
+                    <div id="caffelatte" class="button animated bounceIn drink"><a>ลาเต้</a></div>
+                    <div id="cappuccino" class="button animated bounceIn drink"><a>คาปูชิโน</a></div>
+                    <div id="espresso" class="button animated bounceIn drink"><a>เอสเปรสโซ่</a></div>
+                </div>
+                <div id="teamenu" class="menu">
+                    <div id="earlgrey" class="button animated bounceIn drink"><a>เค้กมะพร้าวอ่อน</a></div>
+                    <div id="greentea" class="button animated bounceIn drink"><a>เครปเค้ก</a></div>
+                    <div id="minttea" class="button animated bounceIn drink"><a>บราวนี่</a></div>
+                    <div id="earlgrey1" class="button animated bounceIn drink"><a>ฮันนีโทส</a></div>
+                    <div id="earlgrey2" class="button animated bounceIn drink"><a>บิงชู</a></div>
+                </div>
+                <p id="screen" class="menu animated slideInUp"></p>
+                <div id="drinkmenu" class="menu animated fadeIn">
+                    <div id="strength">
+                        <em>ความเข้ม</em>
+                        <div class="setting">
+                            <div id="lessstrength">&#10151;</div>
+                            <div id="displaystrength">normal</div>
+                            <div id="morestrength">&#10151;</div>
+                        </div>
+                    </div>
+                    
+                    <div id="sugar">
+                        <em>น้ำตาล</em>
+                        <div class="setting">
+                            <div id="lesssugar">&#10151;</div>
+                            <div id="displaysugar">no</div>
+                            <div id="moresugar">&#10151;</div>
+                        </div>
+                    </div>
+                    <div id="milk">
+                        <em>นม</em>
+                        <div class="setting">
+                            <div id="lessmilk">&#10151;</div>
+                            <div id="displaymilk">no</div>
+                            <div id="moremilk">&#10151;</div>
+                        </div>
+                    </div>
+                    <div id="order" class="animated fadeInDown">
+                        <p>Order
+                        
+                       </p>
+                    </div>
+                </div>
+            </div>
+        </body>
+</html>
+<script>
+// Declare the variables of the menus
+var mainmenu = document.getElementById("mainmenu");
+var coffeemenu = document.getElementById("coffeemenu");
+var teamenu = document.getElementById("teamenu");
+var drinkmenu = document.getElementById("drinkmenu");
+// And the submenu when a drink is selected
+var screen = document.getElementById("screen");
+var displaystrength = document.getElementById("displaystrength");
+var morestrength = document.getElementById("morestrength");
+var lessstrength = document.getElementById("lessstrength");
+var displaysugar = document.getElementById("displaysugar");
+var moresugar = document.getElementById("moresugar");
+var lesssugar = document.getElementById("lesssugar");
+var displaymilk = document.getElementById("displaymilk");
+var moremilk = document.getElementById("moremilk");
+var lessmilk = document.getElementById("lessmilk");
+// The feedback after the Order button is pressed
+var drinkorder = document.getElementById("screen");
+var strengthorder = document.getElementById("displaystrength");
+var sugarorder = document.getElementById("displaysugar");
+var milkorder = document.getElementById("displaymilk");
+// If the user chooses coffee in the main menu show the coffee submenu
+choicecoffee.addEventListener(
+  "click",
+  function() {
+    mainmenu.style.display = "none";
+    coffeemenu.style.display = "flex";
+  },
+  false
+);
+// If the user chooses tea in the main menu show the tea submenu
+choicetea.addEventListener(
+  "click",
+  function() {
+    mainmenu.style.display = "none";
+    teamenu.style.display = "flex";
+  },
+  false
+);
+// If the user selects a drink from the coffee menu show the drink's submenu
+coffee.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "coffee";
+    screen.style.background =
+      "url('http://www.livescience.com/images/i/000/052/689/original/coffee-cup-120516.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+caffelatte.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Caffè latte";
+    screen.style.background =
+      "url('https://www.chemipan.com/home/images/stories/virtuemart/product/%E0%B8%81%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B9%81%E0%B8%9F.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+cappuccino.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Cappuccino";
+    screen.style.background =
+      "url('http://xn--72c9cmoj4abc1r.com/wp-content/uploads/2014/09/Cappuccino1.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+espresso.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Espresso";
+    screen.style.background =
+      "url('http://www.sainampingcoffee.com/WEB/Articles/espresso-main_Full.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+// If the user selects a drink from the tea menu show the drink's submenu
+// The user can change settings like the strength of the drink and the ability to add sugar and/or milk
+morestrength.addEventListener(
+  "click",
+  function() {
+    displaystrength.innerHTML = "strong";
+    morestrength.style.visibility = "hidden";
+    lessstrength.style.visibility = "initial";
+  },
+  false
+);
+lessstrength.addEventListener(
+  "click",
+  function() {
+    displaystrength.innerHTML = "normal";
+    morestrength.style.visibility = "initial";
+    lessstrength.style.visibility = "hidden";
+  },
+  false
+);
+moresugar.addEventListener(
+  "click",
+  function() {
+    displaysugar.innerHTML = "yes";
+    moresugar.style.visibility = "hidden";
+    lesssugar.style.visibility = "initial";
+  },
+  false
+);
+lesssugar.addEventListener(
+  "click",
+  function() {
+    displaysugar.innerHTML = "no";
+    moresugar.style.visibility = "initial";
+    lesssugar.style.visibility = "hidden";
+  },
+  false
+);
+moremilk.addEventListener(
+  "click",
+  function() {
+    displaymilk.innerHTML = "yes";
+    moremilk.style.visibility = "hidden";
+    lessmilk.style.visibility = "initial";
+  },
+  false
+);
+lessmilk.addEventListener(
+  "click",
+  function() {
+    displaymilk.innerHTML = "no";
+    moremilk.style.visibility = "initial";
+    lessmilk.style.visibility = "hidden";
+  },
+  false
+);
+// The user presses the Order button when finished and gets feedback that the order is understood
+order.addEventListener(
+  "click",
+  function() {
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with milk and sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with milk coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        drinkorder.innerHTML.toLowerCase() +
+        "  with milk and sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " with milk coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " with sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " coming up!";
+    }
+  },
+  false
+);
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
